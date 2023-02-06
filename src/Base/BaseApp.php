@@ -127,7 +127,7 @@ abstract class BaseApp implements AppInterface
     {
         /** @var EnvironmentInterface $environment */
         $environment = $this->getContainer()->get(EnvironmentInterface::class);
-        $rootDirectory = realpath(__DIR__ . '/../../../../../../gate.vea');
+        $rootDirectory = realpath(__DIR__ . '/../../../../..');
         $environment->init($this->getMode(), $rootDirectory);
     }
 
