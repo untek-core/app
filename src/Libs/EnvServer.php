@@ -33,6 +33,12 @@ class EnvServer
         return $isMatch ? $matches[1] : null;
     }
 
+    public function startsWithSegmentUri(string $name)
+    {
+        $isMatch = preg_match('/^(\/' . $name . ')($|\/|\?)/', $this->server['REQUEST_URI'], $matches);
+        return $isMatch ? $matches[1] : null;
+    }
+
     public function fixUri(string $name)
     {
         if (ltrim($this->server['REQUEST_URI'], '/') === $name) {

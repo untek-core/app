@@ -41,6 +41,17 @@ abstract class BaseApp implements AppInterface
     private $import = [];
     private $bundleLoader;
     private ?Request $request = null;
+    private string $context;
+
+    public function getContext(): string
+    {
+        return $this->context;
+    }
+
+    public function setContext(string $context): void
+    {
+        $this->context = $context;
+    }
 
     public function getRequest(): ?Request
     {
