@@ -2,9 +2,9 @@
 
 namespace Untek\Core\App\Libs\EnvStorageDrivers;
 
+use RuntimeException;
 use Untek\Core\App\Interfaces\EnvStorageInterface;
 use Untek\Core\Contract\Common\Exceptions\InvalidConfigException;
-use Untek\Domain\Entity\Exceptions\AlreadyExistsException;
 
 /**
  * Хранилище переменных окружения.
@@ -13,7 +13,6 @@ use Untek\Domain\Entity\Exceptions\AlreadyExistsException;
  */
 class EnvStorageArray implements EnvStorageInterface
 {
-
     protected array $env = [];
 
     public function get(string $name, $default = null): mixed
@@ -35,11 +34,12 @@ class EnvStorageArray implements EnvStorageInterface
      * Это дает гарантию, что переменные буду неизменны после их назначения.
      *
      * @param array $env
-     * @throws AlreadyExistsException Переменные уже были назначены ранее
+     * @throws RuntimeException Переменные уже были назначены ранее
      */
-    public function init(array $env) {
-        if(!empty($this->env)) {
-            throw new AlreadyExistsException('Env config already inited!');
+    public function init(array $env)
+    {
+        if (!empty($this->env)) {
+            throw new RuntimeException('Env config already inited!');
         }
         $this->env = $env;
     }
@@ -49,8 +49,9 @@ class EnvStorageArray implements EnvStorageInterface
      *
      * @throws InvalidConfigException Переменные не инициализированы
      */
-    protected function checkInit(): void {
-        if(empty($this->env)) {
+    protected function checkInit(): void
+    {
+        if (empty($this->env)) {
             throw new InvalidConfigException('Empty env config!');
         }
     }
