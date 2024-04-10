@@ -6,6 +6,7 @@ use Psr\Container\ContainerInterface;
 use Untek\Core\App\Interfaces\EnvStorageInterface;
 use Untek\Core\App\Libs\EnvStorageDrivers\EnvStorageGetenv;
 use Untek\Core\Bundle\Libs\BundleLoader;
+use Untek\Core\Code\Helpers\DeprecateHelper;
 use Untek\Core\ConfigManager\Interfaces\ConfigManagerInterface;
 use Untek\Core\ConfigManager\Libs\ConfigManager;
 use Untek\Core\Container\Helpers\ContainerHelper;
@@ -13,6 +14,8 @@ use Untek\Core\Container\Interfaces\ContainerConfiguratorInterface;
 use Untek\Core\Container\Libs\ContainerConfigurator;
 use Untek\Core\Container\Traits\ContainerAwareTrait;
 use Untek\Core\Contract\Common\Exceptions\ReadOnlyException;
+
+DeprecateHelper::hardThrow();
 
 /**
  * Инициализатор окружения и предварительных конфигов
