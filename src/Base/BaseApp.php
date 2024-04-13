@@ -13,10 +13,13 @@ use Untek\Core\App\Interfaces\EnvironmentInterface;
 use Untek\Core\App\Libs\ZnCore;
 use Untek\Core\Arr\Helpers\ArrayHelper;
 use Untek\Core\Bundle\Libs\BundleLoader;
+use Untek\Core\Code\Helpers\DeprecateHelper;
 use Untek\Core\Container\Interfaces\ContainerConfiguratorInterface;
 use Untek\Core\Container\Traits\ContainerAttributeTrait;
 use Untek\Core\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
 use Untek\Core\EventDispatcher\Traits\EventDispatcherTrait;
+
+DeprecateHelper::hardThrow();
 
 /**
  * Абстрактный класс инициализатора приложения.
