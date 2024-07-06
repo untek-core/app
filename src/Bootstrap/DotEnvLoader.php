@@ -18,7 +18,7 @@ class DotEnvLoader
         $this->context = $context;
     }
 
-    public function load(string $path = null)
+    public function load(string $path = null): void
     {
         $names = $this->getFileNames($this->mode);
         $environmentBootstrap = new VlucasBootstrap($this->mode, $this->projectDirectory);
