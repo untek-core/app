@@ -10,12 +10,17 @@ class DotEnvLoader
     private string $projectDirectory;
     private string $mode;
     private string $context;
+    private string $envDirectory;
 
-    public function __construct(string $projectProject, string $context, bool $isTest = false)
+    public function __construct(string $projectProject, string $context, bool $isTest = false, ?string $envDirectory = null)
     {
         $this->projectDirectory = $projectProject;
         $this->mode = $isTest ? 'test' : 'main';
         $this->context = $context;
+        if(empty($envDirectory)) {
+            $envDirectory = $projectProject;
+        }
+        $this->envDirectory = $envDirectory;
     }
 
     public function load(string $path = null): void
@@ -28,7 +33,7 @@ class DotEnvLoader
                 'APP_MODE' => $this->mode,
             ]
         );
-        $environmentBootstrap->loadFromPath($path ?: $this->projectDirectory, $names);
+        $environmentBootstrap->loadFromPath($path ?: $this->envDirectory, $names);
     }
 
     private function getFileNames(string $mode): array
