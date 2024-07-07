@@ -24,9 +24,9 @@ class ConfigDirectory
     public function getConfigDirectory(string $context = null): string
     {
         if($context) {
-            return $this->projectDirectory . '/config/' . $context;
+            return $this->projectDirectory . '/' . $context;
         } else {
-            return $this->projectDirectory . '/config/shared';
+            return $this->projectDirectory . '/shared';
         }
     }
 }
