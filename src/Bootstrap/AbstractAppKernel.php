@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Untek\Core\Container\Helpers\ContainerHelper;
+use Untek\Core\Env\Helpers\EnvHelper;
 use Untek\Core\Kernel\Kernel\BaseKernel;
 
 abstract class AbstractAppKernel extends BaseKernel
@@ -19,7 +20,10 @@ abstract class AbstractAppKernel extends BaseKernel
     protected bool $isTest;
     protected bool $booted = false;
 
-    abstract protected function build(ContainerBuilder $container): void;
+    protected function build(ContainerBuilder $container): void
+    {
+        
+    }
 
     public function __construct(
         ConfigDirectory $configDirectory,
@@ -69,12 +73,16 @@ abstract class AbstractAppKernel extends BaseKernel
         $containerCache = new ContainerCache($this->getCacheDirectory($this->context));
         $hasCache = $containerCache->has();
         $isProd = $this->environment == 'prod';
-        if($isProd && $hasCache) {
+        $isConsole = EnvHelper::isConsole();
+        $isEnabledCache = (bool)getenv('CACHE_CONTAINER_ENABLED');
+        $isUseCache = $isProd && !$isConsole && $isEnabledCache;
+
+        if ($isUseCache && $hasCache) {
             $containerBuilder = $containerCache->load();
         } else {
             $containerBuilder = $this->createContainerInstance();
             $containerBuilder->compile();
-            if($isProd) {
+            if ($isUseCache) {
                 $containerCache->compileContainer($this->context, $containerBuilder);
             }
         }
