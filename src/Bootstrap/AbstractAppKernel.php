@@ -4,7 +4,10 @@ namespace Untek\Core\App\Bootstrap;
 
 use Exception;
 use InvalidArgumentException;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Untek\Core\Container\Helpers\ContainerHelper;
 use Untek\Core\Env\Helpers\EnvHelper;
 use Untek\Core\Kernel\Kernel\BaseKernel;
@@ -22,7 +25,7 @@ abstract class AbstractAppKernel extends BaseKernel
 
     protected function build(ContainerBuilder $container): void
     {
-        
+
     }
 
     public function __construct(
@@ -94,6 +97,11 @@ abstract class AbstractAppKernel extends BaseKernel
     protected function createContainerInstance(): ContainerBuilder
     {
         $containerBuilder = ContainerFactory::create();
+        $fileLocator = new FileLocator(__DIR__);
+        $loader = new ClosureLoader($containerBuilder, $this->environment);
+        $loader = new PhpFileLoader($containerBuilder, $fileLocator);
+        $loader->load(__DIR__ . '/../../resources/main.php');
+
         $this->build($containerBuilder);
         $containerConfigLoader = new ContainerConfigLoader($this->configDirectory, $this->isImportLocalConfig);
         $containerConfigLoader->load($containerBuilder, $this->context);
