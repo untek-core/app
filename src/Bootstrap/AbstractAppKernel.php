@@ -98,7 +98,6 @@ abstract class AbstractAppKernel extends BaseKernel
     {
         $containerBuilder = ContainerFactory::create();
         $fileLocator = new FileLocator(__DIR__);
-        $loader = new ClosureLoader($containerBuilder, $this->environment);
         $loader = new PhpFileLoader($containerBuilder, $fileLocator);
         $loader->load(__DIR__ . '/../../resources/main.php');
 
