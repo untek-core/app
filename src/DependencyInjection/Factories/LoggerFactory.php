@@ -21,7 +21,7 @@ class LoggerFactory
         $logFileName = "{$directory}/{$time}.log";
 
         $level = self::getLevel();
-        $handler = new StreamHandler($logFileName, $level, true, null, true);
+        $handler = new StreamHandler($logFileName, $level, true, 0777, true);
         $formatter = new JsonFormatter();
         $formatter->includeStacktraces();
         /*if (!getenv('APP_ENV') !== 'prod') {
