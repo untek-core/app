@@ -39,7 +39,6 @@ class LoggerFactory
         $manager = ContainerHelper::getContainer()->get(Manager::class);
         $level = self::getLevel();
         $handler = new EloquentHandler($manager, $level);
-
         $logger = new Logger($context);
         $logger->pushHandler($handler);
         return $logger;
