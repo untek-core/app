@@ -6,6 +6,7 @@ use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Untek\Core\Arr\Helpers\ArrayHelper;
 
 class ConfigFinder
 {
@@ -24,8 +25,9 @@ class ConfigFinder
         $this->excludePathes[] = $path;
     }
 
-    public function load(array $paths, string $rootDirectory, FileLoader $loader): void
+    public function load(array|string $paths, string $rootDirectory, FileLoader $loader): void
     {
+        $paths = ArrayHelper::toArray($paths);
         $list = $this->find($paths, $rootDirectory);
         foreach ($list as $item) {
             $loader->load($rootDirectory . '/' . $item);
