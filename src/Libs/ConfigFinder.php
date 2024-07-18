@@ -10,11 +10,18 @@ use Symfony\Component\Finder\SplFileInfo;
 class ConfigFinder
 {
 
+    private array $excludePathes = [];
+
     public function __construct(
         private string $pathTemplate,
         private string $nameTemplate,
     )
     {
+    }
+
+    public function addExcludePath(string $path): void
+    {
+        $this->excludePathes[] = $path;
     }
 
     public function load(array $paths, string $rootDirectory, FileLoader $loader): void
@@ -34,9 +41,21 @@ class ConfigFinder
                 ->path($this->pathTemplate)
                 ->name($this->nameTemplate)
                 ->in($path);
+
             foreach ($files as $file) {
                 /** @var SplFileInfo $file */
-                $list[] = Path::makeRelative($file->getRealPath(), $rootDirectory);
+                $item = Path::makeRelative($file->getRealPath(), $rootDirectory);
+                $isAdd = true;
+                if($this->excludePathes) {
+                    foreach ($this->excludePathes as $excludePath) {
+                        if(str_contains($item, $excludePath)) {
+                            $isAdd = false;
+                        }
+                    }
+                }
+                if($isAdd) {
+                    $list[] = $item;
+                }
             }
         }
         return $list;
