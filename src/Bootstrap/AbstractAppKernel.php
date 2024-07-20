@@ -94,9 +94,7 @@ abstract class AbstractAppKernel extends BaseKernel
         $this->setContainer($containerBuilder);
     }
 
-    protected function createContainerInstance(): ContainerBuilder
-    {
-        $containerBuilder = ContainerFactory::create();
+    public function prepareContainer( $containerBuilder): void {
         $fileLocator = new FileLocator(__DIR__);
         $loader = new PhpFileLoader($containerBuilder, $fileLocator);
         $loader->load(__DIR__ . '/../../resources/main.php');
@@ -104,6 +102,12 @@ abstract class AbstractAppKernel extends BaseKernel
         $this->build($containerBuilder);
         $containerConfigLoader = new ContainerConfigLoader($this->configDirectory, $this->isImportLocalConfig);
         $containerConfigLoader->load($containerBuilder, $this->context);
+    }
+    
+    protected function createContainerInstance(): ContainerBuilder
+    {
+        $containerBuilder = ContainerFactory::create();
+        $this->prepareContainer($containerBuilder);
         return $containerBuilder;
     }
 
