@@ -15,7 +15,12 @@ class ContainerFactory
         self::$container = null;
     }
 
-    public static function create(): ContainerBuilder
+    public static function set(ContainerInterface $container): void
+    {
+        self::$container = $container;
+    }
+
+    public static function create(): ContainerInterface
     {
         if (!isset(self::$container)) {
             self::$container = new ContainerBuilder();
