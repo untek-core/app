@@ -15,7 +15,7 @@ class ConfigFinder
 
     public function __construct(
         private string $pathTemplate,
-        private string $nameTemplate,
+        private ?string $nameTemplate = null,
     )
     {
     }
@@ -41,8 +41,11 @@ class ConfigFinder
             $files = (new Finder())
                 ->files()
                 ->path($this->pathTemplate)
-                ->name($this->nameTemplate)
                 ->in($path);
+
+            if($this->nameTemplate) {
+                $files->name($this->nameTemplate);
+            }
 
             foreach ($files as $file) {
                 /** @var SplFileInfo $file */
