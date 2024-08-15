@@ -3,8 +3,11 @@
 namespace Untek\Core\App\Libs;
 
 use Untek\Core\App\Interfaces\EnvironmentInterface;
+use Untek\Core\Code\Helpers\DeprecateHelper;
 use Untek\Core\DotEnv\Domain\Libs\Symfony\SymfonyBootstrap;
 use Untek\Core\DotEnv\Domain\Libs\Vlucas\VlucasBootstrap;
+
+DeprecateHelper::hardThrow();
 
 class SymfonyEnvironment extends BaseEnvironment implements EnvironmentInterface
 {

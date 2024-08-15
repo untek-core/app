@@ -11,6 +11,8 @@ use Untek\Core\Container\Helpers\ContainerHelper;
 use Untek\Database\Eloquent\Domain\Capsule\Manager;
 use Untek\Utility\Logger\Infrastructure\Handlers\EloquentHandler;
 
+DeprecateHelper::hardThrow();
+
 class LoggerFactory
 {
 

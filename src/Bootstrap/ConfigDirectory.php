@@ -2,6 +2,10 @@
 
 namespace Untek\Core\App\Bootstrap;
 
+use Untek\Core\Code\Helpers\DeprecateHelper;
+
+DeprecateHelper::hardThrow();
+
 class ConfigDirectory
 {
 

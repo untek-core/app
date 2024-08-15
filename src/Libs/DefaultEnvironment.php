@@ -4,8 +4,11 @@ namespace Untek\Core\App\Libs;
 
 use Untek\Core\App\Interfaces\EnvironmentInterface;
 use Untek\Core\App\Interfaces\EnvStorageInterface;
+use Untek\Core\Code\Helpers\DeprecateHelper;
 use Untek\Core\DotEnv\Domain\Interfaces\BootstrapInterface;
 use Untek\Core\DotEnv\Domain\Libs\Vlucas\VlucasBootstrap;
+
+DeprecateHelper::hardThrow();
 
 class DefaultEnvironment extends BaseEnvironment implements EnvironmentInterface
 {

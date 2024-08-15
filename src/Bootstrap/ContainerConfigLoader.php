@@ -3,6 +3,9 @@
 namespace Untek\Core\App\Bootstrap;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Untek\Core\Code\Helpers\DeprecateHelper;
+
+DeprecateHelper::hardThrow();
 
 class ContainerConfigLoader
 {

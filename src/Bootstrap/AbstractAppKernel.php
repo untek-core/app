@@ -8,9 +8,12 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Untek\Core\Code\Helpers\DeprecateHelper;
 use Untek\Core\Container\Helpers\ContainerHelper;
 use Untek\Core\Env\Helpers\EnvHelper;
 use Untek\Core\Kernel\Kernel\BaseKernel;
+
+DeprecateHelper::hardThrow();
 
 abstract class AbstractAppKernel extends BaseKernel
 {

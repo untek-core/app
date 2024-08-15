@@ -3,7 +3,10 @@
 namespace Untek\Core\App\Libs;
 
 use Untek\Core\App\Interfaces\EnvironmentInterface;
+use Untek\Core\Code\Helpers\DeprecateHelper;
 use Untek\Core\DotEnv\Domain\Interfaces\BootstrapInterface;
+
+DeprecateHelper::hardThrow();
 
 abstract class BaseEnvironment implements EnvironmentInterface
 {

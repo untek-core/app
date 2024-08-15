@@ -4,6 +4,8 @@ namespace Untek\Core\App\Bootstrap;
 
 use Untek\Core\DotEnv\Domain\Libs\Vlucas\VlucasBootstrap;
 
+DeprecateHelper::hardThrow();
+
 class DotEnvLoader
 {
 

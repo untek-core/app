@@ -8,9 +8,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\Messenger\DependencyInjection\MessengerPass;
 use Untek\Core\App\Bootstrap\AbstractAppKernel;
+use Untek\Core\Code\Helpers\DeprecateHelper;
 use Untek\Framework\Console\Infrastructure\DependencyInjection\ConsoleCommandPass;
 use Untek\Model\Cqrs\Infrastructure\DependencyInjection\CqrsPass;
 use Untek\Model\EntityManager\DependencyInjection\EntityManagerPass;
+
+DeprecateHelper::hardThrow();
 
 class Kernel extends AbstractAppKernel
 {
